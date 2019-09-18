@@ -1,5 +1,6 @@
 
-public class Node {
+// Nodes superclass
+public abstract class Node {
 
 	private int x;
 	private int y;

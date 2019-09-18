@@ -4,12 +4,16 @@ import javax.swing.WindowConstants;
 
 public class Main {
 
+	public static PathFinder pathFinderPanel;
+	
 	public static void main(String[] args) {
 
-		PathFinder p = new PathFinder(50);
-		JFrame frame = generateFrame(p);
+		pathFinderPanel = new PathFinder(50);
+		JFrame frame = generateFrame(pathFinderPanel);
+		frame.add(pathFinderPanel);
 		
-		frame.add(p);
+		pathFinderPanel.setAlgorithm(new AStar());
+		pathFinderPanel.solve();
 	}
 
 	public static JFrame generateFrame(PathFinder p) {

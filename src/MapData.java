@@ -2,8 +2,8 @@
 public class MapData {
 
 	private int[][] grid;
-	private Node start;
-	private Node end;
+	private int[] start;
+	private int[] end;
 	
 	public int[][] getGrid() {
 		return grid;
@@ -11,16 +11,16 @@ public class MapData {
 	public void setGrid(int[][] grid) {
 		this.grid = grid;
 	}
-	public Node getStart() {
+	public int[] getStart() {
 		return start;
 	}
-	public void setStart(Node start) {
+	public void setStart(int[] start) {
 		this.start = start;
 	}
-	public Node getEnd() {
+	public int[] getEnd() {
 		return end;
 	}
-	public void setEnd(Node end) {
+	public void setEnd(int[] end) {
 		this.end = end;
 	}
 
