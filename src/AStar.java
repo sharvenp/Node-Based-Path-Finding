@@ -15,6 +15,7 @@ public class AStar extends Algorithm {
 		super.printMessage();
 		this.setPath(new ArrayList<>());
 		
+		
 		super.updatePanel();
 	}
 	

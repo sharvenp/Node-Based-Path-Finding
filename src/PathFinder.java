@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Graphics;
 
+@SuppressWarnings("serial")
 public class PathFinder extends JPanel {
 
 	public static Algorithm currentAlgorithm;
@@ -20,9 +21,11 @@ public class PathFinder extends JPanel {
 	private final Color NODE_TRAVERSEABLE_COLOR = new Color (255, 255, 0);
 	private final Color NODE_NON_TRAVERSEABLE_COLOR = new Color (255, 0, 255);
 	private final Color OBSTACLE_COLOR = new Color (255, 255, 255);
-	private final Color START_COLOR = new Color(255, 0, 0);
+	private final Color START_COLOR = new Color (255, 0, 0);
 	private final Color END_COLOR = new Color (0, 255, 0);
 	private final Color FREE_COLOR = new Color (0, 0, 0);
+	private final Color LINE_COLOR = new Color (255, 80, 80);
+	private final int offset = 20;
 	
 	public int[][] getGrid() {
 		return grid;
@@ -94,7 +97,7 @@ public class PathFinder extends JPanel {
 						g.setColor(END_COLOR);
 						break;
 				}				
-				g.fillRect(x, y, 1, 1);
+				g.fillRect(x + offset, y + offset, 1, 1);
 			}
 		}
         
@@ -116,14 +119,23 @@ public class PathFinder extends JPanel {
         		radius = 4;
         	}
         	
-        	g.fillOval(currentAlgorithm.getNodes().get(i).getX() - (int)(radius/2), 
-        			   currentAlgorithm.getNodes().get(i).getY() - (int)(radius/2), 
+        	g.fillOval(currentAlgorithm.getNodes().get(i).getX() + offset - (int)(radius/2), 
+        			   currentAlgorithm.getNodes().get(i).getY() + offset - (int)(radius/2), 
         			   radius, radius);
         	
         }
 
         if (currentAlgorithm.getPath() != null) {
-        	System.out.println("Drawing Path");
+        	
+        	g.setColor(LINE_COLOR);
+        	
+        	for (int i = 0; i < currentAlgorithm.getPath().size() - 1; i++) {
+
+        		Node fromNode = currentAlgorithm.getPath().get(i);
+        		Node toNode = currentAlgorithm.getPath().get(i + 1);
+
+        		g.drawLine(fromNode.getX() + offset, fromNode.getY() + offset, toNode.getX() + offset, toNode.getY() + offset);
+        	}
         }
         
     }

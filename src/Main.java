@@ -8,7 +8,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 
-		pathFinderPanel = new PathFinder(50);
+		pathFinderPanel = new PathFinder(25);
 		JFrame frame = generateFrame(pathFinderPanel);
 		frame.add(pathFinderPanel);
 		
@@ -20,7 +20,7 @@ public class Main {
 		JFrame frame = new JFrame();
 		
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(p.getGrid().length + 40, p.getGrid()[1].length + 14);
+        frame.setSize(p.getGrid().length + 100 - 20, p.getGrid()[1].length + 70 - 20);
         frame.setTitle("Node Based Path Finding");
         frame.setVisible(true);
         return frame;
