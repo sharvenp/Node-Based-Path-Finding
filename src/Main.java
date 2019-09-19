@@ -13,7 +13,7 @@ public class Main {
 		frame.add(pathFinderPanel);
 		
 		pathFinderPanel.setAlgorithm(new AStar());
-		pathFinderPanel.solve();
+		pathFinderPanel.runAlgorithm();
 	}
 
 	public static JFrame generateFrame(PathFinder p) {

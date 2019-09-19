@@ -37,7 +37,7 @@ public class PathFinder extends JPanel {
 	}
 
 	public PathFinder(int nodeDensity) {
-			
+					
 		ImageProcessor processor = new ImageProcessor();
 		data = processor.processImage("resources/img.png");
 		grid = data.getGrid();
@@ -50,6 +50,7 @@ public class PathFinder extends JPanel {
 	private void generateNodes() {
 		
 		ArrayList<Node> nodes = new ArrayList<>();
+		int[] delta = new int[2];
 		
 		if (currentAlgorithm.getClass() == AStar.class) {
 			
@@ -57,6 +58,10 @@ public class PathFinder extends JPanel {
 			
 			int xInterval = Math.floorDiv(grid.length, nodeDensity);
 			int yInterval = Math.floorDiv(grid[1].length, nodeDensity);
+			
+			// delta used to get surrounding nodes by algorithms
+			delta[0] = xInterval; 
+			delta[1] = yInterval;
 			
 			for (int y = 0; y < grid.length; y++) {
 				for (int x = 0; x < grid[y].length; x++) {
@@ -68,12 +73,13 @@ public class PathFinder extends JPanel {
 			}
 			nodes.add(new AStarNode(end[0], end[1], true));
 		}
+		
+		currentAlgorithm.setDelta(delta);
 		currentAlgorithm.setNodes(nodes);
-	
 	}
 	
-	public void solve() {
-		currentAlgorithm.findPath();
+	public void runAlgorithm() {
+		currentAlgorithm.solve();
 	}
 	
 	@Override

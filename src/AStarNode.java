@@ -1,30 +1,30 @@
 
 public class AStarNode extends Node {
 
-	private int gCost;
-	private int fCost;
+	private double gCost;
+	private double hCost;
 	
 	public AStarNode(int x, int y, boolean IsOpen) {
 		super(x, y, IsOpen);
 	}
 	
-	public int getGCost() {
+	public double getGCost() {
 		return gCost;
 	}
 
-	public void setGCost(int gCost) {
+	public void setGCost(double gCost) {
 		this.gCost = gCost;
 	}
 
-	public int getFCost() {
-		return fCost;
+	public double getHCost() {
+		return hCost;
 	}
 
-	public void setFCost(int fCost) {
-		this.fCost = fCost;
+	public void setHCost(double hCost) {
+		this.hCost = hCost;
 	}
 
-	public int getHCost() {
-		return fCost + gCost;
+	public double getFCost() {
+		return hCost + gCost;
 	}
 }
