@@ -4,8 +4,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-import com.sun.imageio.spi.RAFImageInputStreamSpi;
-
 public class ImageProcessor {
 
 	public MapData processImage(String dir) {

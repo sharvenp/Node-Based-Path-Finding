@@ -6,12 +6,12 @@ public class AStar extends Algorithm {
 
 	private ArrayList<AStarNode> openNodes;
  	private ArrayList<AStarNode> closedNodes;
-	
- 	private boolean terminated;
+ 	
+ 	private AStarNode closeStart;
+ 	private AStarNode closeEnd;
  	
 	public AStar() {
 		super();
-		terminated = false;
 	}
 	
 	private void evaluateAllNodes() {
@@ -23,28 +23,17 @@ public class AStar extends Algorithm {
 	
 	private void evaluateNode(AStarNode node) {
 		
-		int startx = this.start.getX();
-		int starty = this.start.getY();
-		
-		int endx = this.end.getX();
-		int endy = this.end.getY();
-		
-		int nodex = node.getX();
-		int nodey = node.getY();
-		
-		node.setGCost(super.getDistance(startx, starty, nodex, nodey));
-		node.setHCost(super.getDistance(endx, endy, nodex, nodey));
+		node.setGCost(super.getDistance(closeStart, node));
+		node.setHCost(super.getDistance(closeEnd, node));
 	}
 	
 	public AStarNode getLowestFCost() {
 		
-		double min = -1;
-		AStarNode minNode = null;
+		AStarNode minNode = openNodes.get(0);
 		
 		for (AStarNode node : openNodes) {
-			if (min < node.getFCost()) {
+			if (node.getFCost() < minNode.getFCost() || node.getFCost() == minNode.getFCost() && node.getHCost() < minNode.getHCost()) {
 				minNode = node;
-				min = node.getFCost();
 			}
 		}
 		
@@ -53,68 +42,75 @@ public class AStar extends Algorithm {
 	
 	public void solve () {
 		
-		super.printMessage();
-		this.setPath(new ArrayList<>());
+		super.init();
 		
 		openNodes = new ArrayList<>();
 		closedNodes = new ArrayList<>();
+		closeStart = (AStarNode) super.getClosestNode(this.start);
+		closeEnd = (AStarNode) super.getClosestNode(this.end);
 		
-		openNodes.add((AStarNode) this.getNodes().get(0));
+		openNodes.add(closeStart);
+		closeStart.setOpenColor();
+		
 		evaluateAllNodes();
-		
-		AStarNode currentNode = getLowestFCost();
-		
-		openNodes.remove(currentNode);
-		closedNodes.add(currentNode);
-	
-		findPath(currentNode);
-		
-		System.out.println("Done");
-		
-	}
-	
-	private void findPath (AStarNode currentNode) {
+
+		while (openNodes.size() > 0) {
+			
+			AStarNode currentNode = getLowestFCost();
+			openNodes.remove(currentNode);
+			
+			closedNodes.add(currentNode);
+			currentNode.setClosedColor();
+			
+			super.updatePanel();
+			
+			if (currentNode == closeEnd) {				
 				
-		super.delay(5);
-		super.updatePanel();
-		
-		// Reached End Node
-		if (currentNode == this.getNodes().get(this.getNodes().size() - 1)) {
-			
-			terminated = true;
-			this.getPath().add(currentNode);
-			return;
-			
-		} else {
-			
+				AStarNode pathCurr = currentNode;
+				this.getPath().add(this.end);
+
+				while (pathCurr != null) {
+				
+					this.getPath().add(pathCurr);
+					pathCurr = pathCurr.getParentNode();
+				}
+				
+				this.getPath().add(this.start);
+				
+				System.out.println("Done.");
+				return;
+			} 
+				
 			AStarNode[] adjacentNodes = new AStarNode[8];
+			Node[] adjNodes = super.getAdjacentNodes(currentNode);
 			for (int i = 0; i < adjacentNodes.length; i++) {
-				adjacentNodes[i] = (AStarNode) super.getAdjacentNodes(currentNode)[i];
+				adjacentNodes[i] = (AStarNode) adjNodes[i];
 			}
 			
 			for (AStarNode node : adjacentNodes) {
 			
-				if (node == null || !node.isOpen() || closedNodes.contains(node)) {
+				if (node == null || !node.isOpen() || closedNodes.contains(node))
 					continue;
-				}
 				
-				if (!openNodes.contains(node) || node.getFCost() <= currentNode.getFCost()) {
+				double g = currentNode.getGCost() + getDistance(currentNode, node);
 				
-					evaluateNode(node);
-					findPath(node);
-					
-					
-					if (terminated) {
-						this.getPath().add(currentNode);
-						return;
-					}
-					
-					if (!openNodes.contains(node)) {
+				if (g < node.getGCost() || !openNodes.contains(node)) {
+					node.setGCost(g);
+					node.setHCost(getDistance(node, closeEnd));
+					node.setParentNode(currentNode);
+
+					if (!openNodes.contains(node))
+					{
 						openNodes.add(node);
+						node.setOpenColor();
+						
+						super.updatePanel();
 					}
 				}	
 			}	
 		}
+		
+		System.out.println("No Path Found.");
 	}
 	
 	public String toString() {

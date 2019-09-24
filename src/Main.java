@@ -8,11 +8,12 @@ public class Main {
 	
 	public static void main(String[] args) {
 
-		pathFinderPanel = new PathFinder(25);
+		pathFinderPanel = new PathFinder(50);
 		JFrame frame = generateFrame(pathFinderPanel);
 		frame.add(pathFinderPanel);
 		
-		pathFinderPanel.setAlgorithm(new AStar());
+//		pathFinderPanel.setAlgorithm(new AStar());
+		pathFinderPanel.setAlgorithm(new RBT());
 		pathFinderPanel.runAlgorithm();
 	}
 
