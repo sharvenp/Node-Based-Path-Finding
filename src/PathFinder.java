@@ -18,7 +18,7 @@ public class PathFinder extends JPanel {
 	private int[] start;
 	private int[] end;
 	
-	private final Color NODE_NON_TRAVERSEABLE_COLOR = new Color (255, 255, 0);
+	private final Color NODE_NON_TRAVERSEABLE_COLOR = new Color (255, 0, 255);
 	private final Color OBSTACLE_COLOR = new Color (255, 255, 255);
 	private final Color START_COLOR = new Color (255, 0, 0);
 	private final Color END_COLOR = new Color (0, 255, 0);
@@ -131,7 +131,7 @@ public class PathFinder extends JPanel {
 	        for (int i = 0; i < currentAlgorithm.getNodes().size(); i++) {
 	        	
 	        	g.setColor(currentAlgorithm.getNodes().get(i).getNodeColor());
-	        	int radius = 2;
+	        	int radius = currentAlgorithm.getNodes().get(i).getNodeRadius();
 	        	
 	        	if (!currentAlgorithm.getNodes().get(i).isOpen()) {
 	        		g.setColor(NODE_NON_TRAVERSEABLE_COLOR);

@@ -50,7 +50,7 @@ public class AStar extends Algorithm {
 		closeEnd = (AStarNode) super.getClosestNode(this.end);
 		
 		openNodes.add(closeStart);
-		closeStart.setOpenColor();
+		closeStart.setOpen();
 		
 		evaluateAllNodes();
 
@@ -60,7 +60,7 @@ public class AStar extends Algorithm {
 			openNodes.remove(currentNode);
 			
 			closedNodes.add(currentNode);
-			currentNode.setClosedColor();
+			currentNode.setClosed();
 			
 			super.updatePanel();
 			
@@ -102,7 +102,7 @@ public class AStar extends Algorithm {
 					if (!openNodes.contains(node))
 					{
 						openNodes.add(node);
-						node.setOpenColor();
+						node.setOpen();
 						
 						super.updatePanel();
 					}

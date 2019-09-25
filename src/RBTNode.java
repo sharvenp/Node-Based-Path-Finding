@@ -11,6 +11,7 @@ public class RBTNode extends Node {
 		super(x, y, IsOpen);
 		this.visited = false;
 		this.nodeColor = defaultColor;
+		this.nodeRadius = 2;
 	}
 	
 	public boolean getVisited() {
@@ -20,7 +21,9 @@ public class RBTNode extends Node {
 	public void setVisited(boolean visited) {
 		this.visited = visited;
 		if (visited)
+		{
 			this.nodeColor = visitedColor;
+			this.nodeRadius = 4;
+		}
 	}
-	
 }

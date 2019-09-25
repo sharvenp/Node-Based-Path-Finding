@@ -7,6 +7,7 @@ public abstract class Node {
 	private int y;
 	private boolean open;
 	protected Color nodeColor;
+	protected int nodeRadius;
 	
 	public Node(int x, int y, boolean IsOpen) {
 		this.x = x;
@@ -32,5 +33,9 @@ public abstract class Node {
 	
 	public Color getNodeColor() {
 		return nodeColor;
+	}
+	
+	public int getNodeRadius() {
+		return nodeRadius;
 	}
 }

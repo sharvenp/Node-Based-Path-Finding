@@ -14,12 +14,14 @@ public class AStarNode extends Node {
 		parentNode = null;
 	}
 	
-	public void setOpenColor() {
+	public void setOpen() {
 		this.nodeColor = openColor;
+		this.nodeRadius = 4;
 	}
 	
-	public void setClosedColor() {
+	public void setClosed() {
 		this.nodeColor = closedColor;
+		this.nodeRadius = 2;
 	}
 	
 	public double getGCost() {
