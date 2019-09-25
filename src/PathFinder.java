@@ -126,43 +126,44 @@ public class PathFinder extends JPanel {
 			}
 		}
         
+        if (currentAlgorithm != null) {
         
-        for (int i = 0; i < currentAlgorithm.getNodes().size(); i++) {
-        	
-        	g.setColor(currentAlgorithm.getNodes().get(i).getNodeColor());
-        	int radius = 2;
-        	
-        	if (!currentAlgorithm.getNodes().get(i).isOpen()) {
-        		g.setColor(NODE_NON_TRAVERSEABLE_COLOR);
-        	}
-        	
-        	if (i == 0) {
-        		g.setColor(START_COLOR);
-        		radius = 6;
-        	} else if (i == currentAlgorithm.getNodes().size() - 1) {
-        		g.setColor(END_COLOR);
-        		radius = 6;
-        	}
-        	
-        	g.fillOval(currentAlgorithm.getNodes().get(i).getX() + offset - (int)(radius/2), 
-        			   currentAlgorithm.getNodes().get(i).getY() + offset - (int)(radius/2), 
-        			   radius, radius);
-        	
+	        for (int i = 0; i < currentAlgorithm.getNodes().size(); i++) {
+	        	
+	        	g.setColor(currentAlgorithm.getNodes().get(i).getNodeColor());
+	        	int radius = 2;
+	        	
+	        	if (!currentAlgorithm.getNodes().get(i).isOpen()) {
+	        		g.setColor(NODE_NON_TRAVERSEABLE_COLOR);
+	        	}
+	        	
+	        	if (i == 0) {
+	        		g.setColor(START_COLOR);
+	        		radius = 6;
+	        	} else if (i == currentAlgorithm.getNodes().size() - 1) {
+	        		g.setColor(END_COLOR);
+	        		radius = 6;
+	        	}
+	        	
+	        	g.fillOval(currentAlgorithm.getNodes().get(i).getX() + offset - (int)(radius/2), 
+	        			   currentAlgorithm.getNodes().get(i).getY() + offset - (int)(radius/2), 
+	        			   radius, radius);
+	        	
+	        }
+	
+	        if (currentAlgorithm.getPath() != null) {
+	        	
+	        	g.setColor(LINE_COLOR);
+	        	
+	        	for (int i = 0; i < currentAlgorithm.getPath().size() - 1; i++) {
+	
+	        		Node fromNode = currentAlgorithm.getPath().get(i);
+	        		Node toNode = currentAlgorithm.getPath().get(i + 1);
+	
+	        		g.drawLine(fromNode.getX() + offset, fromNode.getY() + offset, toNode.getX() + offset, toNode.getY() + offset);
+	        	}
+	        }
         }
-
-        if (currentAlgorithm.getPath() != null) {
-        	
-        	g.setColor(LINE_COLOR);
-        	
-        	for (int i = 0; i < currentAlgorithm.getPath().size() - 1; i++) {
-
-        		Node fromNode = currentAlgorithm.getPath().get(i);
-        		Node toNode = currentAlgorithm.getPath().get(i + 1);
-
-        		g.drawLine(fromNode.getX() + offset, fromNode.getY() + offset, toNode.getX() + offset, toNode.getY() + offset);
-        	}
-        }
-        
     }
 	
 }

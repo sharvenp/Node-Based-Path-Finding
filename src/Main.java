@@ -12,8 +12,8 @@ public class Main {
 		JFrame frame = generateFrame(pathFinderPanel);
 		frame.add(pathFinderPanel);
 		
-//		pathFinderPanel.setAlgorithm(new AStar());
-		pathFinderPanel.setAlgorithm(new RBT());
+		pathFinderPanel.setAlgorithm(new AStar());
+//		pathFinderPanel.setAlgorithm(new RBT());
 		pathFinderPanel.runAlgorithm();
 	}
 
